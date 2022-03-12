@@ -17,7 +17,13 @@
         //validar email;
         $email="$_POST[email]";
         $password="$_POST[password]";
-        UserController::Login($email,$password);
+        if(preg_match('/^[a-z-\.0-9]*@[a-z-0-9-\.]*.[a-z]$/',$email)&&trim($password)!=''){
+            UserController::Login($email,$password);
+        }
+        else
+        {
+            header("Location:/assets/view/login.php?war=Email+invalido+ou+senha");
+        }
     }
 ?>
 <body>
