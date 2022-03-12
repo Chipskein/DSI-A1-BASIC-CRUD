@@ -8,7 +8,7 @@
             $con=$db->get();
             if($con)
             {
-                $query="select * from Livros $where";
+                $query="select * from Livros $where order by ano desc";
                 $reqLivros=mysqli_query($con,$query) or mysqli_error($con);         
                 if($reqLivros)
                 {

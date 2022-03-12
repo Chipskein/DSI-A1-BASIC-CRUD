@@ -17,7 +17,10 @@
     {
         $searchType=$_POST["searchType"];
         $search=$_POST["search"];
-        $where="where $searchType like '%$search%' ";
+        if(preg_match("/[a-z\s]{0,255}/",$search)&&($searchType=='titulo' or $searchType=='ano'))
+        {
+            $where="where $searchType like '%$search%' ";
+        }
     }
 
     if(!isset($_SESSION)) session_start();
@@ -32,8 +35,7 @@
     }
 
 ?>
-<body >
-    <div class="overlay">
+<body>
         <div class="header">
             <div class="header-div">
                 <img class="logo-header" src="../icons/icon.png" alt="door">
@@ -157,7 +159,6 @@
                     ?>
             </div>
         </div>
-    </div>
 </body>
 </html>
 

@@ -1,6 +1,8 @@
 :root{
     --color-ocean:rgb(62, 124, 120);
     --color-orange:rgb(238, 143, 34);
+    --black-overlay:rgba(0, 0, 0, 0.6);
+    --color-ocean-overlay:rgba(62, 124, 120,0.6);
 }
 body{
     color: white;
@@ -56,7 +58,7 @@ body{
 }
 #search-submit{
     border: none;
-    background-color: var(--color-ocean);
+    background-color: transparent;
     color: white;
 }
 
@@ -71,7 +73,7 @@ body{
     justify-content: center;
     align-items: center;
     margin: 8%;
-    background-color: var(--color-ocean);
+    background-color: var(--color-ocean-overlay);
     text-align: center;
     border-radius: 20px;
 }
@@ -104,7 +106,12 @@ td>.link{
     font-size: xx-large;
     width: 130px;
 }
-
+.wallpaper2{
+    color: white;
+    background-image: url("../icons/wallpaper.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .title{
     color: var(--color-orange);
 }
