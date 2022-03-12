@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="icons/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <title>Main</title>
 </head>
 <?php
-    //arrays
+    require_once $_SERVER["DOCUMENT_ROOT"].'/controllers/EmprestimoController.php';
     $LivrosEmprestados=[];
     $LivrosDisponiveis=[];
     $where="";
@@ -23,40 +23,19 @@
     if(!isset($_SESSION)) session_start();
     if(isset($_SESSION["userid"])&&isset($_SESSION["email"])&&isset($_SESSION["nome"]))
     {
-        $con=mysqli_connect("localhost",'root','','DS1_LIB');
-        if($con)
-        {
-            $query="select * from Livros $where";
-            $reqLivros=mysqli_query($con,$query) or mysqli_error($con);         
-            if($reqLivros)
-            {
-                while ($row = $reqLivros->fetch_array())
-                {
-                    array_push($LivrosDisponiveis,$row);
-                }
-            }  
-            $id=$_SESSION["userid"];
-            $query="select * from LivrosEmprestados join Livros on Livros.id=LivrosEmprestados.livro where LivrosEmprestados.usuario=$id";
-            $reqLivrosEmprestados=mysqli_query($con,$query) or mysqli_error($con);         
-            if($reqLivrosEmprestados)
-            {
-                while ($row = $reqLivrosEmprestados->fetch_array())
-                {
-                    array_push($LivrosEmprestados,$row);
-                }
-            }    
-        }
+        $LivrosDisponiveis=EmprestimoController::Livros($where);
+        $LivrosEmprestados=EmprestimoController::LivrosEmprestados($_SESSION["userid"]);
     }
     else
     {
-        header("Location:/login.php");
+        header("Location:/assets/view/login.php?war=Nao+Logado");
     }
 
 ?>
 <body>
     <div align="center">
         <h1>Livraria</h1>
-        <a href="/logoff.php">LogOff</a>
+        <a href="/assets/view/logoff.php">LogOff</a>
     </div>
     <br>    
     <div align="center">
@@ -139,7 +118,7 @@
                         echo "<td>$editora</td>";
                         echo "<td>$autores</td>";
                         echo "<td>$qt</td>";
-                        echo $qt>0 ? "<td><a href=/Emprestimo.php?livro=$id>Alugar</a></td>":"";
+                        echo $qt>0 ? "<td><a href=/assets/view/Emprestimo.php?livro=$id>Alugar</a></td>":"";
                     echo "</tr>";
                 }                
             ?>

@@ -2,10 +2,10 @@
     if(!isset($_SESSION)) session_start();
     if(!isset($_SESSION["userid"]))
     {
-        header("Location:/login.php");
+        header("Location:/assets/view/login.php");
     }
     else
     {
-        header("Location:/main.php");
+        header("Location:/assets/view/main.php");
     }
 ?>
