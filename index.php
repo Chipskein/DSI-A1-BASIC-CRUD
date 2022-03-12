@@ -6,6 +6,6 @@
     }
     else
     {
-        header("Location:/books.php");
+        header("Location:/main.php");
     }
 ?>

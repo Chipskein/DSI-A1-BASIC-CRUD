@@ -4,12 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="icons/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Login</title>
 </head>
 <?php
+    if(!isset($_SESSION)) session_start();
+    if(isset($_SESSION["userid"])) header("Location:/main.php");
     if(isset($_POST["email"])&&isset($_POST["password"])&&isset($_POST["submit"]))
     {
-        var_dump($_POST);
+
+        $con=mysqli_connect("localhost",'root','','DS1_LIB');
+        if($con)
+        {
+            $email="$_POST[email]";
+            $password="$_POST[password]";
+            $query="select * from Usuario where Usuario.email='$email'";
+            $req=mysqli_query($con,$query) or mysqli_error($con);
+            if($req)
+            {
+                $data=$req->fetch_array();
+                if(crypt($password,$data["password"])===$data["password"])
+                {
+                    if(!isset($_SESSION)) session_start();
+                    $_SESSION["userid"]=$data["id"];
+                    $_SESSION["email"]=$data["email"];
+                    $_SESSION["nome"]=$data["nome"];
+                    header("Location:/main.php");
+                }
+                else
+                {
+                    echo "Um erro ocorreu";
+                }
+
+            }
+            else
+            {
+                echo "Um erro ocorreu";
+            }
+
+        }
     }
 ?>
 <body>
