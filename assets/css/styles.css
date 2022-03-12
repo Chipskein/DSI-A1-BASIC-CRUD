@@ -8,6 +8,16 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
 }
+.special{
+    text-align: center;
+}
+.suc{
+    color: rgb(125, 179, 45);
+}
+.war{
+    color: rgb(214, 214, 27);
+}
+
 .main{
     color: white;
     background-color: var(--color-orange);

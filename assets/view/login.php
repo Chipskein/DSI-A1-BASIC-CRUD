@@ -22,6 +22,29 @@
 ?>
 <body>
     <div class="overlay">
+        <?php
+            if(isset($_GET["suc"])&&!isset($_GET["err"])&&!isset($_GET["war"]))
+            {
+                $msg=$_GET["suc"];
+                echo "<div class=special>
+                    <h3 class=suc>Sucess:$msg</h3>
+                </div>";
+            }
+            if(isset($_GET["err"])&&!isset($_GET["suc"])&&!isset($_GET["war"]))
+            {
+                $msg=$_GET["err"];
+                echo "<div class=special>
+                    <h3 class=err>Error:$msg</h3>
+                </div>";
+            }
+            if(isset($_GET["war"])&&!isset($_GET["err"])&&!isset($_GET["suc"]))
+            {
+                $msg=$_GET["war"];
+                echo "<div class=special>
+                    <h3 class=war>Warning:$msg</h3>
+                </div>";
+            }
+        ?>
         <div class="root">
             <div class="div-input">
                 <div class="div-logo">
